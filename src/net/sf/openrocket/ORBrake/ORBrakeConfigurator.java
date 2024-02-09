@@ -92,18 +92,31 @@ public class ORBrakeConfigurator extends AbstractSwingSimulationExtensionConfigu
 		BasicSlider sliderTau = new BasicSlider(Tau.getSliderModel(0, 3));
 		panel.add(sliderTau, "w 75lp, wrap");
 
-		panel.add(new JLabel("Drag Coefficient:"));
-		DoubleModel Cd = new DoubleModel(extension, "Cd", UnitGroup.UNITS_COEFFICIENT, 0);
+		panel.add(new JLabel("Rocket Drag Coefficient:"));
+		DoubleModel Rocket_Cd = new DoubleModel(extension, "Rocket_Cd", UnitGroup.UNITS_COEFFICIENT, 0);
 
-		JSpinner spinCd = new JSpinner(Cd.getSpinnerModel());
-		spinCd.setEditor(new SpinnerEditor(spinCd));
-		panel.add(spinCd, "w 65lp!");
+		JSpinner spinRocket_Cd = new JSpinner(Rocket_Cd.getSpinnerModel());
+		spinRocket_Cd.setEditor(new SpinnerEditor(spinRocket_Cd));
+		panel.add(spinRocket_Cd, "w 65lp!");
 
-		UnitSelector unitCd = new UnitSelector(Cd);
-		panel.add(unitCd, "w 25");
+		UnitSelector unitRocket_Cd = new UnitSelector(Rocket_Cd);
+		panel.add(unitRocket_Cd, "w 25");
 
-		BasicSlider sliderCd = new BasicSlider(Cd.getSliderModel(0, 2));
-		panel.add(sliderCd, "w 75lp, wrap");
+		BasicSlider sliderRocket_Cd = new BasicSlider(Rocket_Cd.getSliderModel(0, 2));
+		panel.add(sliderRocket_Cd, "w 75lp, wrap");
+		
+		panel.add(new JLabel("AB Drag Coefficient:"));
+		DoubleModel AB_Cd = new DoubleModel(extension, "AB_Cd", UnitGroup.UNITS_COEFFICIENT, 0);
+
+		JSpinner spinAB_Cd = new JSpinner(AB_Cd.getSpinnerModel());
+		spinAB_Cd.setEditor(new SpinnerEditor(spinAB_Cd));
+		panel.add(spinAB_Cd, "w 65lp!");
+
+		UnitSelector unitAB_Cd = new UnitSelector(AB_Cd);
+		panel.add(unitAB_Cd, "w 25");
+
+		BasicSlider sliderAB_Cd = new BasicSlider(AB_Cd.getSliderModel(0, 2));
+		panel.add(sliderAB_Cd, "w 75lp, wrap");
 
 		panel.add(new JLabel("Estimate Mass:"));
 		DoubleModel Mass = new DoubleModel(extension, "Mass", UnitGroup.UNITS_COEFFICIENT, 0);
@@ -118,7 +131,7 @@ public class ORBrakeConfigurator extends AbstractSwingSimulationExtensionConfigu
 		BasicSlider sliderMass = new BasicSlider(Mass.getSliderModel(0, 40));
 		panel.add(sliderMass, "w 75lp, wrap");
 		
-		panel.add(new JLabel("AB Area:"));
+		panel.add(new JLabel("AB Area (mm^2):"));
 		DoubleModel Area = new DoubleModel(extension, "Area", UnitGroup.UNITS_COEFFICIENT, 0);
 
 		JSpinner spinArea = new JSpinner(Area.getSpinnerModel());

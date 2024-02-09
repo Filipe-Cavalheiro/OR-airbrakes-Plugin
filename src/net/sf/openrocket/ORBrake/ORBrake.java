@@ -21,7 +21,7 @@ public class ORBrake extends AbstractSimulationExtension {
 	@Override
 	public void initialize(SimulationConditions conditions) throws SimulationException {
 		conditions.getSimulationListenerList().add(
-				new ORBrakeSimulationListener(getSetpoint(), getKp(), getKi(), getKd(), getTau(), getCd(), getMass(), getArea()));
+				new ORBrakeSimulationListener(getSetpoint(), getKp(), getKi(), getKd(), getTau(), getRocket_Cd(), getAB_Cd(), getMass(), getArea()));
 	}
 
 	public double getSetpoint() {
@@ -69,12 +69,21 @@ public class ORBrake extends AbstractSimulationExtension {
 		fireChangeEvent();
 	}
 
-	public double getCd() {
-		return config.getDouble("Cd", 0.5);
+	public double getRocket_Cd() {
+		return config.getDouble("Rocket_Cd", 0.5);
 	}
 
-	public void setCd(double Cd) {
-		config.put("Cd", Cd);
+	public void setRocket_Cd(double Rocket_Cd) {
+		config.put("Rocket_Cd", Rocket_Cd);
+		fireChangeEvent();
+	}
+	
+	public double getAB_Cd() {
+		return config.getDouble("AB_Cd", 1.17);
+	}
+
+	public void setAB_Cd(double AB_Cd) {
+		config.put("Rocket_Cd", AB_Cd);
 		fireChangeEvent();
 	}
 
@@ -88,7 +97,7 @@ public class ORBrake extends AbstractSimulationExtension {
 	}
 	
 	public double getArea(){
-		return config.getDouble("Area", 1121.0);
+		return config.getDouble("Area", 4484.0);
 	}
 
 	public void setArea(double area) {
