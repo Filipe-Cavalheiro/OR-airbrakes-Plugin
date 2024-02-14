@@ -1,14 +1,8 @@
 package net.sf.openrocket.ORBrake;
-import net.sf.openrocket.simulation.FlightData;
-import net.sf.openrocket.simulation.FlightDataBranch;
-import net.sf.openrocket.simulation.FlightDataType;
 
 import java.lang.Math;
-import java.util.stream.IntStream;
 import net.sf.openrocket.simulation.SimulationStatus;
-import net.sf.openrocket.simulation.exception.SimulationException;
 import net.sf.openrocket.simulation.listeners.AbstractSimulationListener;
-import net.sf.openrocket.aerodynamics.FlightConditions;
 
 public class ORBrakeSimulationListener extends AbstractSimulationListener {
 	/**
@@ -28,7 +22,8 @@ public class ORBrakeSimulationListener extends AbstractSimulationListener {
 	double T = .05; // Sample time in sec
 
 	// Input parameters for apogee estimator
-	double Cd;
+	double Rocket_Cd;
+	double AB_Cd;
 	double mass;
 	double AB_area;
 
@@ -38,15 +33,16 @@ public class ORBrakeSimulationListener extends AbstractSimulationListener {
 	double diff = 0; // Differential term
 	double prev_measure = 0; // Previous measurement
 
-	public ORBrakeSimulationListener(double setpoint, double Kp, double Ki, double Kd, double tau, double Cd,
-			double mass, double area){
+	public ORBrakeSimulationListener(double setpoint, double Kp, double Ki, double Kd, double tau, double Rocket_Cd,
+			double AB_Cd, double mass, double area){
 		super();
 		this.setpoint = setpoint;
 		this.Kp = Kp;
 		this.Ki = Ki;
 		this.Kd = Kd;
 		this.tau = tau;
-		this.Cd = Cd;
+		this.Rocket_Cd = Rocket_Cd;
+		this.AB_Cd = AB_Cd;
 		this.mass = mass;
 		this.AB_area = area * 0.000001;
 	}
@@ -80,8 +76,8 @@ public class ORBrakeSimulationListener extends AbstractSimulationListener {
 
 	double airbrakeForce(SimulationStatus status, double thrust) {
 		double requiredDrag = requiredDrag(status, thrust);
-		double maxDrag = dragSurface(status.getRocketPosition().z, status.getRocketVelocity().length(), AB_area, 1.17)
-				+ dragSurface(status.getRocketPosition().z, status.getRocketVelocity().length(), RocketArea, Cd);
+		double maxDrag = dragSurface(status.getRocketPosition().z, status.getRocketVelocity().length(), AB_area, AB_Cd)
+				+ dragSurface(status.getRocketPosition().z, status.getRocketVelocity().length(), RocketArea, Rocket_Cd);
 		if (requiredDrag > maxDrag){
 			requiredDrag = maxDrag;
 		} else if (requiredDrag < 0){
@@ -110,13 +106,13 @@ public class ORBrakeSimulationListener extends AbstractSimulationListener {
 		double gravity = status.getSimulationConditions().getGravityModel().getGravity(status.getRocketWorldPosition());
 		double refArea = status.getConfiguration().getReferenceArea();
 
-		double termVelocity = Math.sqrt((2 * mass * gravity) / (Cd * refArea * 1.225));
+		double termVelocity = Math.sqrt((2 * mass * gravity) / (Rocket_Cd * refArea * 1.225));
 		double predApogee = alt + (((Math.pow(termVelocity, 2)) / (2 * gravity))
 				* Math.log((Math.pow(vertVelocity, 2) + Math.pow(termVelocity, 2)) / (Math.pow(termVelocity, 2))));
 
 		// PID Controller
-		double minInte = dragSurface(predApogee, velocity, RocketArea, 0.5);
-		double maxInte = dragSurface(predApogee, velocity, AB_area, 1.17) + minInte; 
+		double minInte = dragSurface(predApogee, velocity, RocketArea, Rocket_Cd);
+		double maxInte = dragSurface(predApogee, velocity, AB_area, AB_Cd) + minInte; 
 		
 		// Error function
 		double err = setpoint - predApogee;
