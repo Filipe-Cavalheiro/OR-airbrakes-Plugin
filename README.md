@@ -1,7 +1,7 @@
 # ORBrake
 An OpenRocket extension for controllable air brakes.  When added to a simulation, a controller processes the rocket's state in order to select required drag in order to bring your vehicle's apogee as close as possible to a given target altitude.  This is primarily used for designing controllers for these systems to fly on actual target altitude rockets.
 
-ORBrake was developed specifically for WPI HPRC's [Sirius Rocket](https://aiaa.wpi.edu/hprc/sirius) by [WPI AIAA's High Power Rocketry Club](https://github.com/WPI-HPRC) and changed for a more general use as long as air brake surface area variation is linear and remains consistently perpendicular to the rocket's thrust vector.
+ORBrake was developed specifically for WPI HPRC's [Sirius Rocket](https://aiaa.wpi.edu/hprc/sirius) by [WPI AIAA's High Power Rocketry Club](https://github.com/WPI-HPRC) and changed for a more general use as long as air brake surface area variation is linear.
 
 **DISCLAIMER: While ORBrake simulates drag, the plugin DOES NOT simulate the motion of a rocket's center of aerodynamic pressure. YOU ARE RESPONSIBLE for ensuring that your rocket remains stable and safe throughout flight.  There is no guarantee of accuracy or safety for simulations done with ORBrake as it has yet to be validated with experimental data.**
 
