@@ -11,6 +11,10 @@ ORBrake was developed specifically for WPI HPRC's [Sirius Rocket](https://aiaa.w
 1. Save `ORBrake.jar` to your OpenRocket Plugin folder.
     * On Windows, the OpenRocket Plugin folder is likely `C:\Users\[USER]\AppData\Roaming\OpenRocket\Plugins`.  
     * If this doesn't work, you can find the OpenRocket folder within your Application Data folder.  To get to the AppData folder, press `Windows + R` then type `%appdata%` and hit enter before navigating to `OpenRocket\Plugins`.
+    * Mac: ~/Library/Application Support/OpenRocket/Plugins
+    * Linux: ~/OpenRocket/Plugins
+
+NOTE: '~' refers to your home directory.
 
 Alternativley can also build it yourself from the source code by following the Contributing section.  
 
