@@ -1,5 +1,6 @@
 package net.sf.openrocket.ORBrake;
 
+
 import net.sf.openrocket.simulation.SimulationConditions;
 import net.sf.openrocket.simulation.exception.SimulationException;
 import net.sf.openrocket.simulation.extension.AbstractSimulationExtension;
@@ -10,7 +11,7 @@ public class ORBrake extends AbstractSimulationExtension {
 	 */
 	@Override
 	public String getName() {
-		return "HPRC - ORBrake";
+		return "NuAr - ORBrake";
 	}
 
 	@Override
@@ -83,7 +84,7 @@ public class ORBrake extends AbstractSimulationExtension {
 	}
 
 	public void setAB_Cd(double AB_Cd) {
-		config.put("Rocket_Cd", AB_Cd);
+		config.put("AB_Cd", AB_Cd);
 		fireChangeEvent();
 	}
 

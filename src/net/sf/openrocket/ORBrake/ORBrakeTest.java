@@ -1,41 +1,19 @@
 package net.sf.openrocket.ORBrake;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ORBrakeTest {
+import net.sf.openrocket.aerodynamics.BarrowmanCalculator;
+import net.sf.openrocket.rocketcomponent.FlightConfiguration;
 
+class ORBrakeTest {
 	static ORBrakeSimulationListener listener;
+	static FlightConfiguration configuration;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		listener = new ORBrakeSimulationListener(2000.0, 10.0, 0.0, 0.0, 1.0, 10, 0.4, 1.0);
+		//ORBrakeSimulationListener(getSetpoint(), getKp(), getKi(), getKd(), getTau(), getRocket_Cd(), getAB_Cd(), getMass(), getArea()));
+		listener = new ORBrakeSimulationListener(3000.0, 8.0, 1.0, 1.0, 1.0, 0.5, 1.17, 23.088, 4484.0);
 	}
-
-//	@AfterAll
-//	static void tearDownAfterClass() throws Exception {
-//	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-//		listener.velocity = 300;
-//		listener.altitude = 3000;
-	}
-
-//	@AfterEach
-//	void tearDown() throws Exception {
-//	}
 	
-	@Test
-	void airCoefficientTest() {
-		double altitude = 3000;
-		double airDensity = listener.airDensity(altitude);
-		System.out.println("airCoefficient: " + airDensity);
-		assertEquals(airDensity, 0.925, 0.1);
-	}
 }

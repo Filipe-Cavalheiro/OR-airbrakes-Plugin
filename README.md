@@ -1,9 +1,9 @@
 # ORBrake
 An OpenRocket extension for controllable air brakes.  When added to a simulation, a controller processes the rocket's state in order to select required drag in order to bring your vehicle's apogee as close as possible to a given target altitude.  This is primarily used for designing controllers for these systems to fly on actual target altitude rockets.
 
-ORBrake was developed specifically for WPI HPRC's [Sirius Rocket](https://aiaa.wpi.edu/hprc/sirius) by [WPI AIAA's High Power Rocketry Club](https://github.com/WPI-HPRC) and changed for a more general use as long as air brake surface area variation is linear.
+ORBrake was developed specifically for WPI HPRC's [Sirius Rocket](https://aiaa.wpi.edu/hprc/sirius) by [WPI AIAA's High Power Rocketry Club](https://github.com/WPI-HPRC) and changed for a more general use as long as air brake surface area variation is linear and remains consistently perpendicular to the rocket's thrust vector.
 
-**DISCLAIMER: While ORBrake simulates drag, the plugin DOES NOT simulate the motion of a rocket's center of aerodynamic pressure. YOU ARE RESPONSIBLE for ensuring that your rocket remains stable and safe throughout flight.  There is no guarantee of accuracy or safety for simulations done with ORBrake as it has yet to be validated with experimental data.**
+**DISCLAIMER: ORBrake simulates drag and the motion of a rocket's center of aerodynamic pressure. BUT YOU ARE RESPONSIBLE for ensuring that your rocket remains stable and safe throughout flight.  There is no guarantee of accuracy or safety for simulations done with ORBrake as it has yet to be validated with experimental data.**
 
 ## Installing
 1. To install ORBrake, click on `Releases` on the right.  
@@ -11,18 +11,11 @@ ORBrake was developed specifically for WPI HPRC's [Sirius Rocket](https://aiaa.w
 1. Save `ORBrake.jar` to your OpenRocket Plugin folder.
     * On Windows, the OpenRocket Plugin folder is likely `C:\Users\[USER]\AppData\Roaming\OpenRocket\Plugins`.  
     * If this doesn't work, you can find the OpenRocket folder within your Application Data folder.  To get to the AppData folder, press `Windows + R` then type `%appdata%` and hit enter before navigating to `OpenRocket\Plugins`.
-    * Mac: ~/Library/Application Support/OpenRocket/Plugins
-    * Linux: ~/OpenRocket/Plugins
-
-NOTE: '~' refers to your home directory.
 
 Alternativley can also build it yourself from the source code by following the Contributing section.  
 
 ## Using the Plugin
-To use ORBrake, it must be enabled on your simulation.  To do this, create a new simulation or edit an existing one.  In the `Edit Simulation` window, go to the `Simulation options` tab.  Finally, click `Add Extension` and select ORBrake under the `Flight` tab.  The plugin settings window will open.  Click `close` once you are done.  You can then execute the simulation. 
-
-## Contributing
-ORBrake is written in Java.  This section explains what dependencies are required to build the project as well as how to configure the development environment.
+To use ORBrake, it must be enabled on your simulation.  To do this, create a new simulation or edit an existing one.  In the `Edit Simulation` window, go to the `Simulation options` tab. Click `Add Extension` and select ORBrake under the `Flight` tab.  The plugin settings window will open.  Click `close` once you are done.  Now create a new Tube Fin this will represent your air brakes. Change the name of the Tube Fins to AirBrakes. You can then execute the simulation. (the size of the tube fin is not important just the number of fins). If you do not add the Tube Fin it is still possible to use the extension but the CoP will not change and the drag will just be subtracted from the thrust.
 
 ### Dependencies
 1. [jdk 17](https://adoptopenjdk.net/): OpenRocket requires Java 17. Older versions are incompatible. To compile code, jdk 17 is required.
